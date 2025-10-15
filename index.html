@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile UI Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 375px;
+            background: linear-gradient(180deg, #E85D9A 0%, #E85D9A 75%, #F5C4D8 75%, #F5C4D8 100%);
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 20px 10px;
+            background: transparent;
+        }
+
+        /* Image Section */
+        .image-section {
+            margin: 20px;
+            padding: 60px 40px;
+            border: 3px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .image-placeholder {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .image-icon {
+            width: 50px;
+            height: 40px;
+            background: #E85D9A;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .image-icon::before {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            width: 20px;
+            height: 12px;
+            background: #E85D9A;
+            transform: rotate(-30deg);
+            border-radius: 2px;
+        }
+
+        .image-circle {
+            width: 15px;
+            height: 15px;
+            background: #FFB6D9;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+        }
+
+        .image-circle-small {
+            width: 10px;
+            height: 10px;
+            background: #FFB6D9;
+            border-radius: 50%;
+        }
+
+        /* Progress Dots */
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0;
+            padding: 0 20px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: white;
+            width: 14px;
+            height: 14px;
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.2);
+        }
+
+        /* Options List */
+        .options-container {
+            padding: 0 20px 20px;
+        }
+
+        .option-item {
+            background: white;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .option-text {
+            font-size: 15px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .option-arrow {
+            color: #E85D9A;
+            font-size: 16px;
+        }
+
+        /* Demo Button */
+        .demo-label {
+            position: absolute;
+            bottom: 110px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            background: #F5C4D8;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-button {
+            background: rgba(0, 0, 0, 0.7);
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.85);
+            transform: scale(1.05);
+        }
+
+        .nav-button i {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .mobile-container {
+                max-width: 100%;
+                border-radius: 20px;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mobile-container {
+                max-width: 400px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .option-item {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .option-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .option-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .option-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header Section -->
+        <div class="header"></div>
+
+        <!-- Image Upload Section -->
+        <div class="image-section">
+            <div class="image-placeholder">
+                <div class="image-icon">
+                    <div class="image-circle"></div>
+                </div>
+                <div class="image-circle-small"></div>
+            </div>
+        </div>
+
+        <!-- Progress Dots -->
+        <div class="progress-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <!-- Options List -->
+        <div class="options-container">
+            <div class="option-item">
+                <span class="option-text">opetíon of</span>
+                <i class="fas fa-chevron-right option-arrow"></i>
+            </div>
+            <div class="option-item">
+                <span class="option-text">opetíon of</span>
+                <i class="fas fa-chevron-right option-arrow"></i>
+            </div>
+            <div class="option-item">
+                <span class="option-text">opetíon of</span>
+                <i class="fas fa-chevron-right option-arrow"></i>
+            </div>
+        </div>
+
+        <!-- Demo Label -->
+        <div class="demo-label">Demo 4</div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="nav-button">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress dots functionality
+        const dots = document.querySelectorAll('.dot');
+        let currentDot = 0;
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                dots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                currentDot = index;
+            });
+        });
+
+        // Auto-advance dots every 3 seconds
+        setInterval(() => {
+            dots.forEach(d => d.classList.remove('active'));
+            currentDot = (currentDot + 1) % dots.length;
+            dots[currentDot].classList.add('active');
+        }, 3000);
+
+        // Option items click handler
+        const optionItems = document.querySelectorAll('.option-item');
+        optionItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                console.log(`Option ${index + 1} clicked`);
+                // Add your navigation logic here
+            });
+        });
+
+        // Image section click handler
+        const imageSection = document.querySelector('.image-section');
+        imageSection.addEventListener('click', () => {
+            console.log('Image upload area clicked');
+            // Add file upload logic here
+        });
+
+        // Footer navigation click handler
+        const navButton = document.querySelector('.nav-button');
+        navButton.addEventListener('click', () => {
+            console.log('Navigation menu clicked');
+            // Add menu toggle logic here
+        });
+    </script>
+</body>
+</html>
